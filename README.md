@@ -1,6 +1,6 @@
-# Vanilla Safeguards
+# Not My Spawn!
 
-A lightweight quality-of-life mod for Minecraft 1.21.1 on NeoForge. The project is a clean foundation for small safeguards, previews, and notifications that preserve vanilla behavior while preventing accidental actions.
+A lightweight quality-of-life mod for Minecraft 1.21.1 on NeoForge, focused on safer and clearer bed mechanics and respawning.
 
 ## Development environment
 

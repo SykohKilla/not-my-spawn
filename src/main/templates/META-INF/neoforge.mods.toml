@@ -8,7 +8,7 @@ version="${mod_version}"
 displayName="${mod_name}"
 authors="SykohKilla"
 description='''
-Small, focused safeguards and notifications that make vanilla Minecraft less error-prone.
+Small quality-of-life improvements for bed mechanics and respawning.
 '''
 
 [[dependencies.${mod_id}]]
