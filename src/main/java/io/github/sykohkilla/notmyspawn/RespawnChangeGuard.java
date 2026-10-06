@@ -75,15 +75,35 @@ final class RespawnChangeGuard {
 
     static void handleResponse(ServerPlayer player, boolean accepted) {
         PendingInteraction pending = PENDING.remove(player.getUUID());
-        if (!accepted || pending == null || !isStillValid(player, pending)) {
+        if (pending == null || !isStillValid(player, pending)) {
             return;
         }
 
-        ALLOW_ONCE.put(player.getUUID(), pending.clickedPos());
-        ItemStack heldItem = player.getItemInHand(pending.hand());
-        player.gameMode.useItemOn(player, player.serverLevel(), heldItem, pending.hand(), pending.hitResult());
-        ALLOW_ONCE.remove(player.getUUID());
+        if (!accepted) {
+            if (pending.clickedState().getBlock() instanceof BedBlock) {
+                replayInteraction(player, pending, true);
+            }
+            return;
+        }
+
+        replayInteraction(player, pending, false);
         RespawnHealthMonitor.recordCurrentState(player);
+    }
+
+    private static void replayInteraction(ServerPlayer player, PendingInteraction pending, boolean preserveSpawn) {
+        ALLOW_ONCE.put(player.getUUID(), pending.clickedPos());
+        if (preserveSpawn) {
+            RespawnSlotManager.suppressNextSpawnChange(player);
+        }
+        try {
+            ItemStack heldItem = player.getItemInHand(pending.hand());
+            player.gameMode.useItemOn(player, player.serverLevel(), heldItem, pending.hand(), pending.hitResult());
+        } finally {
+            ALLOW_ONCE.remove(player.getUUID());
+            if (preserveSpawn) {
+                RespawnSlotManager.finishSuppression(player);
+            }
+        }
     }
 
     static void clear(ServerPlayer player) {

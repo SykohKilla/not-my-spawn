@@ -12,8 +12,14 @@ public final class NotMySpawn {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public NotMySpawn(IEventBus modEventBus) {
+        RespawnSlotManager.register(modEventBus);
         modEventBus.addListener(ModNetworking::register);
         NeoForge.EVENT_BUS.addListener(RespawnChangeGuard::onRightClickBlock);
+        NeoForge.EVENT_BUS.addListener(RespawnSlotManager::onPlayerTick);
+        NeoForge.EVENT_BUS.addListener(RespawnSlotManager::onPlayerLogin);
+        NeoForge.EVENT_BUS.addListener(RespawnSlotManager::onPlayerLogout);
+        NeoForge.EVENT_BUS.addListener(RespawnSlotManager::onPlayerChangedDimension);
+        NeoForge.EVENT_BUS.addListener(RespawnSlotManager::onPlayerSpawnSet);
         NeoForge.EVENT_BUS.addListener(RespawnHealthMonitor::onPlayerTick);
         NeoForge.EVENT_BUS.addListener(RespawnHealthMonitor::onPlayerLogin);
         NeoForge.EVENT_BUS.addListener(RespawnHealthMonitor::onPlayerLogout);
