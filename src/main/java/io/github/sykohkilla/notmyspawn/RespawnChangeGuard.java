@@ -70,7 +70,11 @@ final class RespawnChangeGuard {
         PENDING.put(player.getUUID(), pending);
         event.setCanceled(true);
         event.setCancellationResult(InteractionResult.SUCCESS);
-        PacketDistributor.sendToPlayer(player, new OpenRespawnConfirmationPayload(currentSpawn, spawnTarget));
+        PacketDistributor.sendToPlayer(player, new OpenRespawnConfirmationPayload(
+                currentSpawn,
+                spawnTarget,
+                level.dimension().equals(net.minecraft.world.level.Level.NETHER)
+        ));
     }
 
     static void handleResponse(ServerPlayer player, boolean accepted) {
@@ -87,7 +91,6 @@ final class RespawnChangeGuard {
         }
 
         replayInteraction(player, pending, false);
-        RespawnHealthMonitor.recordCurrentState(player);
     }
 
     private static void replayInteraction(ServerPlayer player, PendingInteraction pending, boolean preserveSpawn) {

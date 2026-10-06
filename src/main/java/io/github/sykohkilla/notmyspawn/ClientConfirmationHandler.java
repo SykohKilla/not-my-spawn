@@ -16,7 +16,9 @@ final class ClientConfirmationHandler {
             Minecraft minecraft = Minecraft.getInstance();
             Screen previousScreen = minecraft.screen;
             Component message = Component.translatable(
-                    "screen.not_my_spawn.confirm.message",
+                    payload.nether()
+                            ? "screen.not_my_spawn.confirm.nether.message"
+                            : "screen.not_my_spawn.confirm.overworld.message",
                     format(payload.currentSpawn()),
                     format(payload.newSpawn())
             );
@@ -25,7 +27,9 @@ final class ClientConfirmationHandler {
                         PacketDistributor.sendToServer(new RespawnConfirmationResponsePayload(accepted));
                         minecraft.setScreen(previousScreen);
                     },
-                    Component.translatable("screen.not_my_spawn.confirm.title"),
+                    Component.translatable(payload.nether()
+                            ? "screen.not_my_spawn.confirm.nether.title"
+                            : "screen.not_my_spawn.confirm.overworld.title"),
                     message,
                     Component.translatable("screen.not_my_spawn.confirm.accept"),
                     Component.translatable("gui.cancel")

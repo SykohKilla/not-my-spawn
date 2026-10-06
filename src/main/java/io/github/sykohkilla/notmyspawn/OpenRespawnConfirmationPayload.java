@@ -9,7 +9,8 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-record OpenRespawnConfirmationPayload(BlockPos currentSpawn, BlockPos newSpawn) implements CustomPacketPayload {
+record OpenRespawnConfirmationPayload(BlockPos currentSpawn, BlockPos newSpawn, boolean nether)
+        implements CustomPacketPayload {
     static final Type<OpenRespawnConfirmationPayload> TYPE = new Type<>(
             ResourceLocation.fromNamespaceAndPath(NotMySpawn.MOD_ID, "open_respawn_confirmation")
     );
@@ -19,8 +20,11 @@ record OpenRespawnConfirmationPayload(BlockPos currentSpawn, BlockPos newSpawn) 
                     (buffer, payload) -> {
                         buffer.writeBlockPos(payload.currentSpawn());
                         buffer.writeBlockPos(payload.newSpawn());
+                        buffer.writeBoolean(payload.nether());
                     },
-                    buffer -> new OpenRespawnConfirmationPayload(buffer.readBlockPos(), buffer.readBlockPos())
+                    buffer -> new OpenRespawnConfirmationPayload(
+                            buffer.readBlockPos(), buffer.readBlockPos(), buffer.readBoolean()
+                    )
             );
 
     @Override

@@ -40,6 +40,10 @@ final class RespawnSlotManager {
         SUPPRESS_CHANGES.remove(player.getUUID());
     }
 
+    static RespawnSlotData slots(ServerPlayer player) {
+        return player.getData(RESPAWN_SLOTS);
+    }
+
     static void onPlayerSpawnSet(PlayerSetSpawnEvent event) {
         if (!(event.getEntity() instanceof ServerPlayer player)) {
             return;

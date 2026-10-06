@@ -23,6 +23,16 @@ final class RespawnSlotData implements INBTSerializable<CompoundTag> {
         return currentDimension.equals(Level.NETHER) ? nether : overworld;
     }
 
+    @Nullable
+    RespawnPoint overworld() {
+        return overworld;
+    }
+
+    @Nullable
+    RespawnPoint nether() {
+        return nether;
+    }
+
     void set(RespawnPoint point) {
         if (point.dimension().equals(Level.NETHER)) {
             nether = point;
