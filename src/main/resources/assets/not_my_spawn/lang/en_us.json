@@ -1,3 +1,10 @@
 {
-  "modmenu.descriptionTranslation.not_my_spawn": "Small quality-of-life improvements for beds and respawning."
+  "modmenu.descriptionTranslation.not_my_spawn": "Small quality-of-life improvements for beds and respawning.",
+  "screen.not_my_spawn.confirm.title": "Change Respawn Point?",
+  "screen.not_my_spawn.confirm.message": "Your current respawn point at %1$s will be replaced by %2$s.",
+  "screen.not_my_spawn.confirm.accept": "Change Respawn Point",
+  "message.not_my_spawn.destroyed": "Your respawn point was destroyed.",
+  "message.not_my_spawn.obstructed": "Your respawn point is obstructed.",
+  "message.not_my_spawn.anchor_depleted": "Your respawn anchor is no longer usable.",
+  "message.not_my_spawn.restored": "Your respawn point is usable again."
 }

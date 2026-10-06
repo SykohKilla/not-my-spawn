@@ -18,3 +18,13 @@ A lightweight quality-of-life mod for Minecraft 1.21.1 on NeoForge, focused on s
 ```
 
 The built mod JAR is written to `build/libs/`.
+
+## Behavior
+
+- Using a different bed or charged respawn anchor while the current respawn point is still usable opens Minecraft's standard confirmation screen.
+- Confirming replays the original interaction on the server, allowing vanilla to remain authoritative for sleeping, anchor charging, explosions, obstruction, and multiplayer behavior.
+- Breaking, obstructing, or depleting the saved respawn block produces one concise action-bar warning per state transition.
+- Restoring a blocked respawn location produces a single recovery message.
+- Health is checked after relevant block changes and player lifecycle events, with a low-frequency fallback check every five seconds.
+
+The implementation adds no gameplay textures, items, blocks, particles, sounds, or custom-styled screens.
